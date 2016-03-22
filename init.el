@@ -1,0 +1,1 @@
+/mnt/xfs1/home/asalomatov/.emacs.d/init.el
