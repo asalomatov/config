@@ -16,19 +16,15 @@
 (setq auto-save-file-name-transforms `((".*" ,"~/.emacs_backup/" t)))
 
 (require 'package)
-
 (add-to-list 'package-archives
-       '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents))
+(elpy-enable)
 
 (defvar myPackages
   '(better-defaults
-    ein
     elpy
-    flycheck
     material-theme))
 
 (mapc #'(lambda (package)
@@ -46,18 +42,7 @@
 ;; PYTHON CONFIGURATION
 ;; --------------------------------------
 
-(elpy-enable)
-(elpy-use-ipython)
-
-;; use flycheck not flymake with elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
 ;; toggle comments
-(global-set-key (kbd "C-;") 'comment-uncomment-region)
-;; enable autopep8 formatting on save
-;;(require 'py-autopep8)
-;;(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(global-set-key (kbd "C-#") 'comment-uncomment-region)
 
 ;; init.el ends here
